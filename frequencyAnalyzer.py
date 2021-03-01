@@ -1,16 +1,13 @@
 #!/usr/local/bin/python3
+# Made by @swisscoding on Instagram
 
-# kleinste und höchste Nummer des möglichen Buchstabens für das jeweilige Verfahren
-lowest = int(input("Lowest ASCII number: "))
-highest = int(input("Highest ASCII number: "))
+from colored import stylize, fg
 
-# der Text, welcher analysiert werden soll
-text = input("Text to analyze: ")
+# decoration
+print(stylize("\n---- | Text analyzer | ----\n", fg("red")))
 
-# Liste aller möglichen Zeichen
-characters = [chr(i) for i in range(lowest, highest+1)]
-
-# zählt wie viel Mal der Buchstabe, die Ziffer oder das Sonderzeichen im Text vorkommt
+# functions
+# counts every character
 def count_char(text, char):
     count = 0
     for c in text:
@@ -18,12 +15,11 @@ def count_char(text, char):
             count += 1
     return count
 
-# rechnet es in Prozent um und gibt das Resultat visualisiert im Commandprompt zurück
+# returns in percentage
 def percentage():
     zeroPerc = []
     for char in characters:
         perc = 100 * count_char(text, char) / len(text)
-        # zeigt nur die relevanten an
         if perc == 0:
             zeroPerc.append(char)
         elif perc != 0:
@@ -31,4 +27,13 @@ def percentage():
 
     print(f"{zeroPerc} - 0.0 %\n")
 
+# user interaction
+lowest = int(input("Lowest ASCII number: "))
+highest = int(input("Highest ASCII number: "))
+text = input("Text to analyze: ")
+
+# all characters in interval
+characters = [chr(i) for i in range(lowest, highest+1)]
+
+# main execution
 percentage()
